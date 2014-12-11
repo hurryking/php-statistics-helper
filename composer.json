@@ -1,0 +1,23 @@
+{
+	"name": "PHP Laravel Statistics Helper",
+	"description": "",
+	"keywords": ["php", "statistics", "helper", "illuminate"],
+	"require": {
+		"nesbot/carbon": "~1.0",
+		"illuminate/database": "~4.2|~5.0",
+		"illuminate/container": "~4.2|~5.0",
+		"illuminate/support": "~4.2|~5.0"
+	},
+	"authors": [
+		{
+			"name": "Bradley Weston",
+			"homepage": "http://bweston.me",
+			"email": "brad@legalweb.org.uk"
+		}
+	],
+	"autoload": {
+		"psr-4": {
+			"LW\\Statistics": "."
+		}
+	}
+}
