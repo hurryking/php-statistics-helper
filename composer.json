@@ -1,6 +1,6 @@
 {
-	"name": "PHP Laravel Statistics Helper",
-	"description": "",
+	"name": "legalweb/php-statistics-helper",
+	"description": "PHP Laravel Statistics Helper",
 	"keywords": ["php", "statistics", "helper", "illuminate"],
 	"require": {
 		"nesbot/carbon": "~1.0",
