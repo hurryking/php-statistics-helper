@@ -17,7 +17,7 @@
 	],
 	"autoload": {
 		"psr-4": {
-			"LW\\Statistics": "."
+			"LW\\Statistics\\": "."
 		}
 	}
 }
