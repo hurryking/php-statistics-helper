@@ -23,10 +23,10 @@ class Interval {
 	 * @var array
 	 */
 	protected $sqlSelect = [
-		'hourly' => 'CONCAT(YEAR(created_at), \'-\', MONTH(created_at), \'-\', DAY(created_at), \'-\', HOUR(created_at))',
-		'daily' => 'CONCAT(YEAR(created_at), \'-\', MONTH(created_at), \'-\', DAY(created_at))',
-		'monthly' => 'CONCAT(YEAR(created_at), \'-\', MONTH(created_at))',
-		'yearly' => 'YEAR(created_at)',
+		'hourly' => 'CONCAT(YEAR({date}), \'-\', MONTH({date}), \'-\', DAY({date}), \'-\', HOUR({date}))',
+		'daily' => 'CONCAT(YEAR({date}), \'-\', MONTH({date}), \'-\', DAY({date}))',
+		'monthly' => 'CONCAT(YEAR({date}), \'-\', MONTH({date}))',
+		'yearly' => 'YEAR({date})',
 	];
 
 	/**
@@ -67,11 +67,13 @@ class Interval {
 	}
 
 	/**
+	 * @param string $table
+	 * @param string $field
 	 * @return string
 	 */
-	protected function getSQLSelect()
+	protected function getSQLSelect($table, $field = 'created_at')
 	{
-		return $this->sqlSelect[$this->interval];
+		return str_replace('{date}', "{$table}.{$field}", $this->sqlSelect[$this->interval]);
 	}
 
 	/**
@@ -80,7 +82,7 @@ class Interval {
 	 */
 	public function applyQuery($query)
 	{
-		$query->selectRaw($this->getSQLSelect() . ' as __interval__');
+		$query->selectRaw($this->getSQLSelect($query->from) . ' as __interval__');
 		$query->groupBy('__interval__');
 	}
 
@@ -89,6 +91,7 @@ class Interval {
 	 * @param \Carbon\Carbon $start
 	 * @param \Carbon\Carbon $end
 	 * @return array
+	 * @throws \RuntimeException when $start and $end aren't set.
 	 */
 	public function parse($results, Carbon $start = null, Carbon $end = null)
 	{
