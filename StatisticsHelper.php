@@ -72,6 +72,32 @@ class StatisticsHelper {
 			$return[$provider] = $this->results($providerCollection->get($provider), $scopes);
 		}
 
+		$return['_totals'] = $this->totals($return);
+		return $return;
+	}
+
+	/**
+	 * @param \Illuminate\Support\Collection $results
+	 * @return array
+	 */
+	protected function totals($results)
+	{
+		$return = new Collection;
+
+		$results->map(function($results, $provider) use ($return)
+		{
+			$totals = new Collection;
+
+			foreach ($results as $scope => $resultSet)
+			{
+				$totals[$scope] = array_sum(array_values($resultSet));
+			}
+
+
+			$totals['_total'] = array_sum($totals->toArray());
+			$return[$provider] = $totals;
+		});
+
 		return $return;
 	}
 
