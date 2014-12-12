@@ -72,7 +72,12 @@ class StatisticsHelper {
 			$return[$provider] = $this->results($providerCollection->get($provider), $scopes);
 		}
 
-		$return['_totals'] = $this->totals($return);
+
+		if ($this->interval)
+		{
+			$return['_totals'] = $this->totals($return);
+		}
+		
 		return $return;
 	}
 
