@@ -92,6 +92,12 @@ class Interval {
 	 */
 	public function parse($results, Carbon $start = null, Carbon $end = null)
 	{
+		if (! $start)
+		{
+			// @todo, where do we start from?
+			throw new \RuntimeException('Intervals can only be used when a period is set.');
+		}
+
 		$results = $this->parseResults($results);
 		$return = [];
 		$current = clone $start;
