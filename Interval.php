@@ -23,9 +23,9 @@ class Interval {
 	 * @var array
 	 */
 	protected $sqlSelect = [
-		'hourly' => 'CONCAT(YEAR({date}), \'-\', MONTH({date}), \'-\', DAY({date}), \'-\', HOUR({date}))',
-		'daily' => 'CONCAT(YEAR({date}), \'-\', MONTH({date}), \'-\', DAY({date}))',
-		'monthly' => 'CONCAT(YEAR({date}), \'-\', MONTH({date}))',
+		'hourly' => 'CONCAT(YEAR({date}), \'-\', LPAD(MONTH({date}), 2, 0), \'-\', LPAD(DAY({date}), 2, 0), \'-\', LPAD(HOUR({date}), 2, 0))',
+		'daily' => 'CONCAT(YEAR({date}), \'-\', LPAD(MONTH({date}), 2, 0), \'-\', LPAD(DAY({date}), 2, 0))',
+		'monthly' => 'CONCAT(YEAR({date}), \'-\', LPAD(MONTH({date}), 2, 0))',
 		'yearly' => 'YEAR({date})',
 	];
 
